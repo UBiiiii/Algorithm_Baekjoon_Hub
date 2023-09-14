@@ -6,12 +6,13 @@ import java.math.BigInteger;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int r = 31, m = 1234567891, n = Integer.parseInt(br.readLine());
-        BigInteger tmp = new BigInteger("0");
+        int m = 1234567891, n = Integer.parseInt(br.readLine());
+        BigInteger tmp = new BigInteger("0"), ri = new BigInteger("1");
         String input = br.readLine();
         for(int i=0;i<n;i++) {
             int c = input.charAt(i) - 'a' + 1;
-            tmp = tmp.add(new BigInteger(Long.toString(Math.round(c*Math.pow(r,i)))));
+            tmp = tmp.add(ri.multiply(new BigInteger(Integer.toString(c))));
+            ri = ri.multiply(new BigInteger("31"));
         }
 
         System.out.println(tmp.mod(new BigInteger(Integer.toString(m))));
