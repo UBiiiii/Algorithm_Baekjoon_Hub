@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main{
@@ -20,7 +21,7 @@ public class Main{
 			input[i][1] = Integer.parseInt(st.nextToken());
 		}
 			
-		mergeSort(0, n-1);
+		Arrays.sort(input, (a,b)-> a[1]==b[1] ? a[0]-b[0] : a[1] - b[1]);
 		
 		int[] pre = new int[] {-1, -1};
 		answer = 0;
@@ -34,36 +35,6 @@ public class Main{
 		}
 			
 		System.out.println(answer);
-	}
-	
-	private static void mergeSort(int s, int e) {
-		if(e<=s) return;
-		
-		int center = (e+s)/2;
-		
-		mergeSort(s,center);
-		mergeSort(center+1,e);
-		
-		int left = s, right = center+1, cnt = 0;
-		int[][] tmp = new int[e-s+1][2];
-		while(left<=center && right<=e) {
-			if(input[left][1] > input[right][1]) 	tmp[cnt++] = input[right++];
-			else if(input[left][1] == input[right][1] && input[left][0] > input[right][0]) tmp[cnt++] = input[right++];
-			else																	tmp[cnt++] = input[left++];
-		}
-		
-		while(left<=center ) {
-			tmp[cnt++] = input[left++];
-		}
-		
-		while(right<=e) {
-			tmp[cnt++] = input[right++];
-		}
-		
-		for(int i=0;i<e-s+1;i++) {
-			input[s+i] = tmp[i];
-		}
-		
 	}
 
 }
